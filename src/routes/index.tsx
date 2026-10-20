@@ -78,7 +78,7 @@ function Index() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 py-20">
-        <SectionTitle eyebrow="Across the country" title="Where we take you">We operate throughout Kenya, from the Rift Valley lakes to the savanna and the Indian Ocean coast.</SectionTitle>
+        <SectionTitle eyebrow="Across the country" title="Where we take you">Based in Nairobi, we operate throughout Kenya — from the Rift Valley lakes to the savanna and the Indian Ocean coast.</SectionTitle>
         <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {destinations.map((d) => (
             <div key={d.name} className="rounded-2xl border bg-card p-6">

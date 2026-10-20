@@ -2,7 +2,7 @@ import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { Mail, Phone, MessageCircle, Check, Clock, MapPin } from "lucide-react";
 import logo from "@/assets/daystar-logo.jpeg.asset.json";
-import { EMAIL, PHONE_DISPLAY, PHONE_TEL, whatsappLink, type Tour } from "@/lib/site";
+import { EMAIL, LOCATION, PHONE_DISPLAY, PHONE_TEL, whatsappLink, type Tour } from "@/lib/site";
 
 const nav = [
   { to: "/", label: "Home" },
@@ -54,6 +54,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           </div>
           <div className="space-y-3 text-sm">
             <p className="mb-3 font-semibold uppercase tracking-widest text-gold">Contact</p>
+            <p className="flex items-center gap-2 opacity-90"><MapPin className="h-4 w-4 text-gold" />{LOCATION}</p>
             <a href={`tel:${PHONE_TEL}`} className="flex items-center gap-2 hover:text-gold"><Phone className="h-4 w-4" />{PHONE_DISPLAY}</a>
             <a href={whatsappLink()} target="_blank" rel="noreferrer" className="flex items-center gap-2 hover:text-gold"><MessageCircle className="h-4 w-4" />WhatsApp us</a>
             <a href={`mailto:${EMAIL}`} className="flex items-center gap-2 hover:text-gold"><Mail className="h-4 w-4" />{EMAIL}</a>

@@ -1,15 +1,15 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail, MessageCircle, Phone, MapPin } from "lucide-react";
+import { Mail, MessageCircle, Phone, MapPin, Clock, Car } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
-import { EMAIL, PHONE_DISPLAY, PHONE_TEL, whatsappLink } from "@/lib/site";
+import { EMAIL, HOURS, LOCATION, MAPS_LINK, PHONE_DISPLAY, PHONE_TEL, whatsappLink } from "@/lib/site";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
       { title: "Contact | Daystar Globe Tours & Safaris" },
-      { name: "description", content: "Call, WhatsApp or email Daystar Globe Tours on +254 790 990300 to book your Naivasha safari." },
+      { name: "description", content: "Daystar Globe Tours is based in Nairobi, Kenya. Call, WhatsApp or email +254 790 990300 to book a Nairobi pick-up or a safari anywhere in Kenya." },
       { property: "og:title", content: "Contact Daystar Globe Tours" },
-      { property: "og:description", content: "Book your Kenya safari via WhatsApp, phone or email." },
+      { property: "og:description", content: "Nairobi-based Kenya safaris — book via WhatsApp, phone or email." },
     ],
   }),
   component: Contact,
@@ -20,14 +20,16 @@ function Contact() {
     { icon: MessageCircle, label: "WhatsApp", value: PHONE_DISPLAY, href: whatsappLink(), ext: true },
     { icon: Phone, label: "Call us", value: PHONE_DISPLAY, href: `tel:${PHONE_TEL}` },
     { icon: Mail, label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
-    { icon: MapPin, label: "Location", value: "Naivasha, Kenya" },
+    { icon: MapPin, label: "Based in", value: LOCATION, href: MAPS_LINK, ext: true },
+    { icon: Clock, label: "Office hours", value: HOURS },
+    { icon: Car, label: "Pick-up & drop-off", value: "Anywhere in Nairobi, plus JKIA transfers" },
   ];
   return (
     <SiteLayout>
       <section className="mx-auto max-w-4xl px-4 py-16 text-center">
         <p className="font-semibold uppercase tracking-widest text-primary">Get in touch</p>
         <h1 className="mt-2 text-5xl font-bold">Let's plan your trip</h1>
-        <p className="mt-3 text-muted-foreground">The fastest way to reach us is WhatsApp — we usually reply quickly.</p>
+        <p className="mt-3 text-muted-foreground">We are based in Nairobi and operate nationwide. The fastest way to reach us is WhatsApp — we usually reply quickly.</p>
         <div className="mt-10 grid gap-5 text-left sm:grid-cols-2">
           {items.map(({ icon: Icon, label, value, href, ext }) => {
             const inner = (

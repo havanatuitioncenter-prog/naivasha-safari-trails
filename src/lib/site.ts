@@ -8,6 +8,9 @@ import diani from "@/assets/diani.jpg";
 export const PHONE_DISPLAY = "+254 790 990300";
 export const PHONE_TEL = "+254790990300";
 export const EMAIL = "info@daystarglobetours.co.ke";
+export const LOCATION = "Nairobi, Kenya";
+export const MAPS_LINK = "https://www.google.com/maps/search/?api=1&query=Nairobi%2C%20Kenya";
+export const HOURS = "Mon–Sat, 7:00am – 9:00pm (EAT)";
 
 export function whatsappLink(message = "Hello Daystar Globe Tours, I'd like to enquire about a safari.") {
   return `https://wa.me/254790990300?text=${encodeURIComponent(message)}`;
@@ -124,7 +127,9 @@ export const testimonials = [
 ];
 
 export const faqs = [
-  { q: "Where do your tours start?", a: "We operate across Kenya. Most Naivasha tours can start from Naivasha town or with a pick-up from Nairobi, and longer safaris start wherever suits you." },
+  { q: "Where are you based?", a: "We are based in Nairobi, Kenya and run tours countrywide. Most of our experiences are around Lake Naivasha, about 90 km from Nairobi." },
+  { q: "Where do your tours start?", a: "Nairobi city tours start in the city. Naivasha tours include pick-up and drop-off in Nairobi, and longer safaris begin wherever suits you — your Nairobi hotel, the airport or your next stop." },
+  { q: "Do you pick up from my hotel or airport in Nairobi?", a: "Yes. We collect guests from hotels, apartments and offices across Nairobi, and we arrange JKIA airport transfers to match your flight times." },
   { q: "Can tours be customised?", a: "Yes. Every itinerary can be adjusted for private groups, families, budget or luxury stays." },
   { q: "How do I book?", a: "Send us a WhatsApp message, call or email with your dates and group size and we'll send you a quote." },
   { q: "When is the best time to visit?", a: "Kenya is great year-round. The dry seasons (June–October and January–February) are best for game viewing, and the Great Migration is in the Mara from July to October." },
