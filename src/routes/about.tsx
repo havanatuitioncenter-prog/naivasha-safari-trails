@@ -19,9 +19,9 @@ function About() {
     <SiteLayout>
       <section className="mx-auto grid max-w-7xl items-center gap-12 px-4 py-16 md:grid-cols-2">
         <div>
-          <SectionTitle eyebrow="About us" title="Kenya-wide safaris, a Naivasha speciality" />
-          <p className="mt-5 text-muted-foreground">Daystar Globe Tours and Safaris is a Kenyan tour company operating across the whole country — from the Maasai Mara and Amboseli to the Rift Valley lakes and the Indian Ocean coast.</p>
-          <p className="mt-4 text-muted-foreground">Lake Naivasha is where we offer the most experiences: boat safaris, Crescent Island walks, Hell's Gate cycling, Mount Longonot hikes and easy day trips from Nairobi.</p>
+          <SectionTitle eyebrow="About us" title="Nairobi-based, Kenya-wide safaris" />
+          <p className="mt-5 text-muted-foreground">Daystar Globe Tours and Safaris is a Nairobi-based Kenyan tour company operating across the whole country — from the Maasai Mara and Amboseli to the Rift Valley lakes and the Indian Ocean coast.</p>
+          <p className="mt-4 text-muted-foreground">From our Nairobi office we arrange city tours, airport transfers and pick-up for every itinerary. Lake Naivasha is where we offer the most experiences: boat safaris, Crescent Island walks, Hell's Gate cycling, Mount Longonot hikes and easy day trips from Nairobi.</p>
           <p className="mt-4 text-muted-foreground">Our promise is simple: honest advice, friendly professional guides, and journeys that become lifelong memories.</p>
         </div>
         <img src={crescent} alt="Guided walking safari on Crescent Island" loading="lazy" width={1200} height={912} className="rounded-2xl shadow-card" />
