@@ -9,7 +9,6 @@ export const PHONE_DISPLAY = "+254 790 990300";
 export const PHONE_TEL = "+254790990300";
 export const EMAIL = "info@daystarglobetours.co.ke";
 export const LOCATION = "Nairobi, Kenya";
-export const LOCATION_LONG = "Nairobi, Kenya";
 export const MAPS_LINK = "https://www.google.com/maps/search/?api=1&query=Nairobi%2C%20Kenya";
 export const HOURS = "Mon–Sat, 7:00am – 9:00pm (EAT)";
 
