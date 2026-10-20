@@ -6,9 +6,9 @@ export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
       { title: "About Us | Daystar Globe Tours & Safaris" },
-      { name: "description", content: "A Kenyan tour company operating safaris countrywide, specialising in Lake Naivasha experiences." },
+      { name: "description", content: "A Nairobi-based Kenyan tour company operating safaris countrywide, specialising in Lake Naivasha experiences." },
       { property: "og:title", content: "About Daystar Globe Tours & Safaris" },
-      { property: "og:description", content: "Kenya-wide safaris with a Naivasha speciality." },
+      { property: "og:description", content: "Nairobi-based, Kenya-wide safaris with a Naivasha speciality." },
     ],
   }),
   component: About,
