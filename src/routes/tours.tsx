@@ -1,28 +1,36 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { SiteLayout, TourCard } from "@/components/SiteLayout";
+import { SiteLayout, TourCard, SectionTitle } from "@/components/SiteLayout";
 import { tours } from "@/lib/site";
 
 export const Route = createFileRoute("/tours")({
   head: () => ({
     meta: [
-      { title: "Naivasha & Kenya Safari Tours | Daystar Globe Tours" },
-      { name: "description", content: "Lake Naivasha boat safaris, Crescent Island walks, Hell's Gate cycling, Longonot hikes, Nakuru and Maasai Mara trips." },
+      { title: "Kenya Safari Tours & Naivasha Trips | Daystar Globe Tours" },
+      { name: "description", content: "Lake Naivasha boat safaris, Crescent Island, Hell's Gate, Longonot, Nakuru, Maasai Mara, Amboseli and Diani beach tours." },
       { property: "og:title", content: "Safari Tours | Daystar Globe Tours" },
-      { property: "og:description", content: "Day trips and multi-day safaris from Naivasha across Kenya." },
+      { property: "og:description", content: "Naivasha day trips and safaris across Kenya." },
     ],
   }),
   component: Tours,
 });
 
 function Tours() {
+  const naivasha = tours.filter((t) => t.naivasha);
+  const kenya = tours.filter((t) => !t.naivasha);
   return (
     <SiteLayout>
-      <section className="mx-auto max-w-6xl px-4 py-16">
-        <p className="font-semibold uppercase tracking-widest text-primary">Our tours</p>
-        <h1 className="mt-2 text-5xl font-bold">Naivasha & beyond</h1>
-        <p className="mt-3 max-w-2xl text-muted-foreground">Day trips around Lake Naivasha and longer safaris across Kenya. Every tour can be customised — just ask.</p>
-        <div className="mt-10 grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {tours.map((t) => <TourCard key={t.name} tour={t} />)}
+      <section className="mx-auto max-w-7xl px-4 py-16">
+        <SectionTitle eyebrow="Our tours" title="Lake Naivasha experiences">Our biggest collection of tours — day trips and short stays around Lake Naivasha and the Rift Valley. Every tour can be customised.</SectionTitle>
+        <div className="mt-10 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+          {naivasha.map((t) => <TourCard key={t.name} tour={t} detailed />)}
+        </div>
+      </section>
+      <section className="bg-secondary py-16">
+        <div className="mx-auto max-w-7xl px-4">
+          <SectionTitle eyebrow="Across Kenya" title="Safaris & holidays nationwide">From the Maasai Mara to the Indian Ocean coast.</SectionTitle>
+          <div className="mt-10 grid gap-7 md:grid-cols-2 lg:grid-cols-3">
+            {kenya.map((t) => <TourCard key={t.name} tour={t} detailed />)}
+          </div>
         </div>
       </section>
     </SiteLayout>
