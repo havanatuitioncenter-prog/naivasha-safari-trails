@@ -72,7 +72,7 @@ function Index() {
             <Link to="/tours" className="font-semibold uppercase tracking-wider text-primary hover:text-gold">All tours →</Link>
           </div>
           <div className="mt-10 grid gap-7 md:grid-cols-3">
-            {[tours[0], tours[1], tours[6]].map((t) => <TourCard key={t.name} tour={t} />)}
+            {tours.filter((_, i) => i === 0 || i === 1 || i === 6).map((t) => <TourCard key={t.name} tour={t} />)}
           </div>
         </div>
       </section>
