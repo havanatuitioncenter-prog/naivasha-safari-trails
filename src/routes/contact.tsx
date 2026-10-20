@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Mail, MessageCircle, Phone, MapPin } from "lucide-react";
+import { Mail, MessageCircle, Phone, MapPin, Clock, Car } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
-import { EMAIL, PHONE_DISPLAY, PHONE_TEL, whatsappLink } from "@/lib/site";
+import { EMAIL, HOURS, LOCATION, MAPS_LINK, PHONE_DISPLAY, PHONE_TEL, whatsappLink } from "@/lib/site";
 
 export const Route = createFileRoute("/contact")({
   head: () => ({
@@ -20,7 +20,9 @@ function Contact() {
     { icon: MessageCircle, label: "WhatsApp", value: PHONE_DISPLAY, href: whatsappLink(), ext: true },
     { icon: Phone, label: "Call us", value: PHONE_DISPLAY, href: `tel:${PHONE_TEL}` },
     { icon: Mail, label: "Email", value: EMAIL, href: `mailto:${EMAIL}` },
-    { icon: MapPin, label: "Location", value: "Naivasha, Kenya" },
+    { icon: MapPin, label: "Based in", value: LOCATION, href: MAPS_LINK, ext: true },
+    { icon: Clock, label: "Office hours", value: HOURS },
+    { icon: Car, label: "Pick-up & drop-off", value: "Anywhere in Nairobi, plus JKIA transfers" },
   ];
   return (
     <SiteLayout>
