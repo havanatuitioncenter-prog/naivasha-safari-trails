@@ -32,7 +32,7 @@ export function VisitorForm({ kind, selectedTour = "Custom Kenya itinerary" }: {
         if (!saved.success) { setError(saved.message); return; }
         setSuccess(`Request received. Reference: ${saved.id.slice(0,8).toUpperCase()}. Your booking is not yet confirmed; dates, availability and a quote will be agreed with you.`);
       } else {
-        const result = reviewSchema.safeParse({ ...values, rating, consent: values.consent === "on" });
+        const result = reviewSchema.safeParse({ ...values, rating, consent: values['consent'] === "on" });
         if (!result.success) { setError(result.error.issues[0]?.message ?? "Check your details."); return; }
         const saved = await saveReview({ data: result.data });
         if (!saved.success) { setError(saved.message); return; }
