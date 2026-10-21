@@ -35,9 +35,9 @@ export function SiteLayout({ children }: { children: ReactNode }) {
           </nav>
           <Button asChild className="shrink-0 rounded-full"><Link to="/booking" search={{ tour: "Custom Kenya itinerary" }}>Book now</Link></Button>
         </div>
-        <nav className="flex justify-center gap-4 overflow-x-auto border-t px-4 py-2 text-xs font-medium uppercase tracking-wider lg:hidden">
+        <nav className="flex justify-start gap-4 overflow-x-auto border-t px-4 py-2 text-xs font-medium uppercase tracking-wider sm:justify-center lg:hidden">
           {nav.map((n) => (
-            <Link key={n.to} to={n.to} activeProps={{ className: "text-gold" }} activeOptions={{ exact: true }}>{n.label}</Link>
+            <Link key={n.to} to={n.to} className="shrink-0" activeProps={{ className: "text-gold" }} activeOptions={{ exact: true }}>{n.label}</Link>
           ))}
         </nav>
       </header>
