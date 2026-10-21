@@ -10,3 +10,6 @@
 <!-- LOVABLE:END -->
 
 Business facts (base city, coverage, contacts, tour data) live in src/lib/site.ts and are read by every page, so a corrected fact changes in one place instead of drifting across routes.
+
+Visitor submissions use shared Zod schemas and TanStack server functions; booking contact data is service-role-only, while consented visitor reviews are publicly readable. This keeps private requests separate from public stories.
+Tour detail URLs use stable name-derived slugs and an unnested tours detail route so the tour catalogue does not swallow detail pages.
