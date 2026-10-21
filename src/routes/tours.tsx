@@ -5,6 +5,8 @@ import { tours } from "@/lib/site";
 export const Route = createFileRoute("/tours")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Kenya Safari Tours & Naivasha Trips | Daystar Globe Tours" },
       { name: "description", content: "Lake Naivasha boat safaris, Crescent Island, Hell's Gate, Longonot, Nakuru, Maasai Mara, Amboseli and Diani beach tours." },
       { property: "og:title", content: "Safari Tours | Daystar Globe Tours" },

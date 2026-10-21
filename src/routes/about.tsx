@@ -5,6 +5,8 @@ import { SiteLayout, SectionTitle } from "@/components/SiteLayout";
 export const Route = createFileRoute("/about")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "About Us | Daystar Globe Tours & Safaris" },
       { name: "description", content: "A Nairobi-based Kenyan tour company operating safaris countrywide, specialising in Lake Naivasha experiences." },
       { property: "og:title", content: "About Daystar Globe Tours & Safaris" },

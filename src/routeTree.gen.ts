@@ -11,9 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as BookingRouteImport } from './routes/booking'
 import { Route as ContactRouteImport } from './routes/contact'
+import { Route as ItineraryRouteImport } from './routes/itinerary'
 import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as ToursRouteImport } from './routes/tours'
+import { Route as ToursSlugRouteImport } from './routes/tours_.$slug'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -25,9 +28,19 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookingRoute = BookingRouteImport.update({
+  id: '/booking',
+  path: '/booking',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ItineraryRoute = ItineraryRouteImport.update({
+  id: '/itinerary',
+  path: '/itinerary',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TestimonialsRoute = TestimonialsRouteImport.update({
@@ -40,43 +53,85 @@ const ToursRoute = ToursRouteImport.update({
   path: '/tours',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ToursSlugRoute = ToursSlugRouteImport.update({
+  id: '/tours_/$slug',
+  path: '/tours/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/booking': typeof BookingRoute
   '/contact': typeof ContactRoute
+  '/itinerary': typeof ItineraryRoute
   '/testimonials': typeof TestimonialsRoute
   '/tours': typeof ToursRoute
+  '/tours/$slug': typeof ToursSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/booking': typeof BookingRoute
   '/contact': typeof ContactRoute
+  '/itinerary': typeof ItineraryRoute
   '/testimonials': typeof TestimonialsRoute
   '/tours': typeof ToursRoute
+  '/tours/$slug': typeof ToursSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/booking': typeof BookingRoute
   '/contact': typeof ContactRoute
+  '/itinerary': typeof ItineraryRoute
   '/testimonials': typeof TestimonialsRoute
   '/tours': typeof ToursRoute
+  '/tours_/$slug': typeof ToursSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/about' | '/contact' | '/testimonials' | '/tours'
+  fullPaths:
+    | '/'
+    | '/about'
+    | '/booking'
+    | '/contact'
+    | '/itinerary'
+    | '/testimonials'
+    | '/tours'
+    | '/tours/$slug'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/about' | '/contact' | '/testimonials' | '/tours'
-  id: '__root__' | '/' | '/about' | '/contact' | '/testimonials' | '/tours'
+  to:
+    | '/'
+    | '/about'
+    | '/booking'
+    | '/contact'
+    | '/itinerary'
+    | '/testimonials'
+    | '/tours'
+    | '/tours/$slug'
+  id:
+    | '__root__'
+    | '/'
+    | '/about'
+    | '/booking'
+    | '/contact'
+    | '/itinerary'
+    | '/testimonials'
+    | '/tours'
+    | '/tours_/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  BookingRoute: typeof BookingRoute
   ContactRoute: typeof ContactRoute
+  ItineraryRoute: typeof ItineraryRoute
   TestimonialsRoute: typeof TestimonialsRoute
   ToursRoute: typeof ToursRoute
+  ToursSlugRoute: typeof ToursSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -95,11 +150,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/booking': {
+      id: '/booking'
+      path: '/booking'
+      fullPath: '/booking'
+      preLoaderRoute: typeof BookingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
       fullPath: '/contact'
       preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/itinerary': {
+      id: '/itinerary'
+      path: '/itinerary'
+      fullPath: '/itinerary'
+      preLoaderRoute: typeof ItineraryRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/testimonials': {
@@ -116,15 +185,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ToursRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/tours_/$slug': {
+      id: '/tours_/$slug'
+      path: '/tours/$slug'
+      fullPath: '/tours/$slug'
+      preLoaderRoute: typeof ToursSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  BookingRoute: BookingRoute,
   ContactRoute: ContactRoute,
+  ItineraryRoute: ItineraryRoute,
   TestimonialsRoute: TestimonialsRoute,
   ToursRoute: ToursRoute,
+  ToursSlugRoute: ToursSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

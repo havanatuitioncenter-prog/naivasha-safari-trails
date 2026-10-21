@@ -2,11 +2,13 @@ import { Link } from "@tanstack/react-router";
 import type { ReactNode } from "react";
 import { Mail, Phone, MessageCircle, Check, Clock, MapPin } from "lucide-react";
 import logo from "@/assets/daystar-logo.jpeg.asset.json";
-import { EMAIL, LOCATION, PHONE_DISPLAY, PHONE_TEL, whatsappLink, type Tour } from "@/lib/site";
+import { EMAIL, LOCATION, PHONE_DISPLAY, PHONE_TEL, whatsappLink, tourSlug, type Tour } from "@/lib/site";
+import { Button } from "@/components/ui/button";
 
 const nav = [
   { to: "/", label: "Home" },
   { to: "/tours", label: "Tours" },
+  { to: "/itinerary", label: "Itinerary" },
   { to: "/about", label: "About" },
   { to: "/testimonials", label: "Testimonials" },
   { to: "/contact", label: "Contact" },
@@ -31,9 +33,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
               </Link>
             ))}
           </nav>
-          <a href={whatsappLink()} target="_blank" rel="noreferrer" className="rounded-full bg-primary px-6 py-2.5 text-sm font-semibold uppercase tracking-wider text-primary-foreground hover:bg-primary/90">
-            Book now
-          </a>
+          <Button asChild className="shrink-0 rounded-full"><Link to="/booking" search={{ tour: "Custom Kenya itinerary" }}>Book now</Link></Button>
         </div>
         <nav className="flex justify-center gap-4 overflow-x-auto border-t px-4 py-2 text-xs font-medium uppercase tracking-wider lg:hidden">
           {nav.map((n) => (
@@ -91,7 +91,7 @@ export function TourCard({ tour, detailed = false }: { tour: Tour; detailed?: bo
           <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5 text-gold" />{tour.area}</span>
           <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5 text-gold" />{tour.duration}</span>
         </div>
-        <h3 className="mt-3 text-2xl font-semibold text-primary">{tour.name}</h3>
+        <h3 className="mt-3 text-2xl font-semibold text-primary"><Link to="/tours/$slug" params={{ slug: tourSlug(tour.name) }}>{tour.name}</Link></h3>
         <p className="mt-2 text-sm text-muted-foreground">{tour.summary}</p>
         <ul className="mt-4 flex flex-wrap gap-2">
           {tour.highlights.map((h) => <li key={h} className="rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground">{h}</li>)}
@@ -104,9 +104,7 @@ export function TourCard({ tour, detailed = false }: { tour: Tour; detailed?: bo
             </ul>
           </div>
         )}
-        <a href={whatsappLink(`Hello Daystar Globe Tours, I'm interested in the "${tour.name}" tour.`)} target="_blank" rel="noreferrer" className="mt-6 inline-flex items-center justify-center gap-2 rounded-full bg-primary px-4 py-3 text-sm font-semibold uppercase tracking-wider text-primary-foreground hover:bg-primary/90">
-          <MessageCircle className="h-4 w-4" /> Enquire on WhatsApp
-        </a>
+        <Button asChild className="mt-6"><Link to="/tours/$slug" params={{ slug: tourSlug(tour.name) }}>View tour & request booking</Link></Button>
       </div>
     </article>
   );

@@ -1,3 +1,4 @@
+import { VisitorForm } from "@/components/VisitorForms";
 import { createFileRoute } from "@tanstack/react-router";
 import { Mail, MessageCircle, Phone, MapPin, Clock, Car } from "lucide-react";
 import { SiteLayout } from "@/components/SiteLayout";
@@ -6,6 +7,8 @@ import { EMAIL, HOURS, LOCATION, MAPS_LINK, PHONE_DISPLAY, PHONE_TEL, whatsappLi
 export const Route = createFileRoute("/contact")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Contact | Daystar Globe Tours & Safaris" },
       { name: "description", content: "Daystar Globe Tours is based in Nairobi, Kenya. Call, WhatsApp or email +254 790 990300 to book a Nairobi pick-up or a safari anywhere in Kenya." },
       { property: "og:title", content: "Contact Daystar Globe Tours" },
@@ -49,6 +52,7 @@ function Contact() {
           })}
         </div>
       </section>
+      <section className="mx-auto max-w-3xl px-4 pb-16"><h2 className="mb-8 text-3xl font-semibold text-primary">Send a booking request</h2><VisitorForm kind="booking" /></section>
     </SiteLayout>
   );
 }

@@ -1,13 +1,15 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, ShieldCheck, Compass, Users, Car, Quote } from "lucide-react";
+import { ArrowRight, ShieldCheck, Compass, Users, Car } from "lucide-react";
 import hero from "@/assets/amboseli.jpg";
 import naivasha from "@/assets/hero-naivasha.jpg";
 import { SiteLayout, TourCard, SectionTitle } from "@/components/SiteLayout";
-import { tours, testimonials, faqs, whatsappLink } from "@/lib/site";
+import { tours, faqs, whatsappLink } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { title: "Daystar Globe Tours & Safaris | Kenya Safaris & Naivasha Tours" },
       { name: "description", content: "Handcrafted safaris across Kenya — Maasai Mara, Amboseli, the coast and the widest choice of Lake Naivasha tours." },
       { property: "og:title", content: "Daystar Globe Tours & Safaris" },
@@ -108,15 +110,8 @@ function Index() {
 
       <section className="mx-auto max-w-7xl px-4 py-20">
         <SectionTitle eyebrow="Guest stories" title="What travellers say" />
-        <div className="mt-10 grid gap-6 md:grid-cols-3">
-          {testimonials.map((t) => (
-            <figure key={t.name} className="rounded-2xl bg-card p-7 shadow-card">
-              <Quote className="h-7 w-7 text-gold" />
-              <blockquote className="mt-3 text-muted-foreground">{t.text}</blockquote>
-              <figcaption className="mt-4 font-semibold text-primary">{t.name} <span className="font-normal text-muted-foreground">· {t.from}</span></figcaption>
-            </figure>
-          ))}
-        </div>
+        <p className="mt-4 text-muted-foreground">Read visitors’ experiences and share your own Kenya safari story.</p>
+        <Link to="/testimonials" className="mt-5 inline-flex items-center gap-2 font-semibold text-primary">Read & leave a review <ArrowRight className="h-4 w-4" /></Link>
       </section>
 
       <section className="bg-secondary py-20">
