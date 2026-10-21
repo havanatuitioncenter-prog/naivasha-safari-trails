@@ -16,6 +16,20 @@ export function whatsappLink(message = "Hello Daystar Globe Tours, I'd like to e
   return `https://wa.me/254790990300?text=${encodeURIComponent(message)}`;
 }
 
+export function tourSlug(name: string) {
+  return name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+}
+
+export const kenyaItinerary = [
+  { title: "Nairobi to Naivasha", detail: "Travel into the Rift Valley with a viewpoint stop, then settle in near Lake Naivasha." },
+  { title: "A day on Lake Naivasha", detail: "Enjoy a boat safari and a Crescent Island walking safari, subject to lake conditions and access." },
+  { title: "Naivasha to Lake Nakuru", detail: "Continue to Lake Nakuru National Park for an afternoon game drive and an overnight stay nearby." },
+  { title: "Journey to the Maasai Mara", detail: "Allow a full day for the drive. An evening game drive may be possible depending on arrival and park hours." },
+  { title: "Maasai Mara game drives", detail: "Explore the reserve with your guide, with a picnic lunch where permitted. Wildlife sightings vary." },
+  { title: "Another day in the Mara", detail: "Spend more time on game drives across the plains. Migration sightings depend on season and wildlife movements." },
+  { title: "Return to Nairobi", detail: "Travel back to Nairobi, leaving generous time for the journey and avoiding tight onward flight connections." },
+];
+
 export type Tour = {
   name: string;
   duration: string;
