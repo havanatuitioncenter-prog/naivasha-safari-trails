@@ -1,0 +1,4 @@
+- [ ] Add suggested Kenya itinerary and individual tour details.
+- [ ] Store booking requests securely and verify a real submission.
+- [ ] Add visitor reviews with public readback and verify submission.
+- [ ] Check navigation, form validation, and page metadata.
