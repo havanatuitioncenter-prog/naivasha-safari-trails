@@ -65,8 +65,8 @@ export function buildPlan(answers: PlanAnswers): SafariPlan {
   }
   if (chosen.length === 0) {
     // The top match alone is longer than the trip — fall back to the best tour that fits.
-    const fitting = ranked.find((tour) => durationDays(tour.duration) <= capacity);
-    chosen.push(fitting ?? ranked[ranked.length - 1]);
+    const fitting = ranked.find((tour) => durationDays(tour.duration) <= capacity) ?? ranked.at(-1);
+    if (fitting) chosen.push(fitting);
   }
 
   const days: PlanDay[] = [{ day: 1, title: "Arrival & pick-up", detail: "We meet you in Nairobi — hotel, apartment or JKIA airport — and brief you on the journey ahead." }];
