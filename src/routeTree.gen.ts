@@ -11,9 +11,12 @@
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as BookingRouteImport } from './routes/booking'
+import { Route as BookingStatusRouteImport } from './routes/booking-status'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ItineraryRouteImport } from './routes/itinerary'
+import { Route as PlanRouteImport } from './routes/plan'
 import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as ToursRouteImport } from './routes/tours'
 import { Route as ToursSlugRouteImport } from './routes/tours_.$slug'
@@ -28,9 +31,19 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const BookingRoute = BookingRouteImport.update({
   id: '/booking',
   path: '/booking',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BookingStatusRoute = BookingStatusRouteImport.update({
+  id: '/booking-status',
+  path: '/booking-status',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ContactRoute = ContactRouteImport.update({
@@ -41,6 +54,11 @@ const ContactRoute = ContactRouteImport.update({
 const ItineraryRoute = ItineraryRouteImport.update({
   id: '/itinerary',
   path: '/itinerary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanRoute = PlanRouteImport.update({
+  id: '/plan',
+  path: '/plan',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TestimonialsRoute = TestimonialsRouteImport.update({
@@ -62,9 +80,12 @@ const ToursSlugRoute = ToursSlugRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/booking': typeof BookingRoute
+  '/booking-status': typeof BookingStatusRoute
   '/contact': typeof ContactRoute
   '/itinerary': typeof ItineraryRoute
+  '/plan': typeof PlanRoute
   '/testimonials': typeof TestimonialsRoute
   '/tours': typeof ToursRoute
   '/tours/$slug': typeof ToursSlugRoute
@@ -72,9 +93,12 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/booking': typeof BookingRoute
+  '/booking-status': typeof BookingStatusRoute
   '/contact': typeof ContactRoute
   '/itinerary': typeof ItineraryRoute
+  '/plan': typeof PlanRoute
   '/testimonials': typeof TestimonialsRoute
   '/tours': typeof ToursRoute
   '/tours/$slug': typeof ToursSlugRoute
@@ -83,9 +107,12 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
+  '/admin': typeof AdminRoute
   '/booking': typeof BookingRoute
+  '/booking-status': typeof BookingStatusRoute
   '/contact': typeof ContactRoute
   '/itinerary': typeof ItineraryRoute
+  '/plan': typeof PlanRoute
   '/testimonials': typeof TestimonialsRoute
   '/tours': typeof ToursRoute
   '/tours_/$slug': typeof ToursSlugRoute
@@ -95,9 +122,12 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/about'
+    | '/admin'
     | '/booking'
+    | '/booking-status'
     | '/contact'
     | '/itinerary'
+    | '/plan'
     | '/testimonials'
     | '/tours'
     | '/tours/$slug'
@@ -105,9 +135,12 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/about'
+    | '/admin'
     | '/booking'
+    | '/booking-status'
     | '/contact'
     | '/itinerary'
+    | '/plan'
     | '/testimonials'
     | '/tours'
     | '/tours/$slug'
@@ -115,9 +148,12 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/about'
+    | '/admin'
     | '/booking'
+    | '/booking-status'
     | '/contact'
     | '/itinerary'
+    | '/plan'
     | '/testimonials'
     | '/tours'
     | '/tours_/$slug'
@@ -126,9 +162,12 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
+  AdminRoute: typeof AdminRoute
   BookingRoute: typeof BookingRoute
+  BookingStatusRoute: typeof BookingStatusRoute
   ContactRoute: typeof ContactRoute
   ItineraryRoute: typeof ItineraryRoute
+  PlanRoute: typeof PlanRoute
   TestimonialsRoute: typeof TestimonialsRoute
   ToursRoute: typeof ToursRoute
   ToursSlugRoute: typeof ToursSlugRoute
@@ -150,11 +189,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/booking': {
       id: '/booking'
       path: '/booking'
       fullPath: '/booking'
       preLoaderRoute: typeof BookingRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/booking-status': {
+      id: '/booking-status'
+      path: '/booking-status'
+      fullPath: '/booking-status'
+      preLoaderRoute: typeof BookingStatusRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/contact': {
@@ -169,6 +222,13 @@ declare module '@tanstack/react-router' {
       path: '/itinerary'
       fullPath: '/itinerary'
       preLoaderRoute: typeof ItineraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plan': {
+      id: '/plan'
+      path: '/plan'
+      fullPath: '/plan'
+      preLoaderRoute: typeof PlanRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/testimonials': {
@@ -198,9 +258,12 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
+  AdminRoute: AdminRoute,
   BookingRoute: BookingRoute,
+  BookingStatusRoute: BookingStatusRoute,
   ContactRoute: ContactRoute,
   ItineraryRoute: ItineraryRoute,
+  PlanRoute: PlanRoute,
   TestimonialsRoute: TestimonialsRoute,
   ToursRoute: ToursRoute,
   ToursSlugRoute: ToursSlugRoute,

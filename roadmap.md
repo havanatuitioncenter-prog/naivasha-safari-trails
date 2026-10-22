@@ -2,3 +2,7 @@
 - [x] Store booking requests securely and verify a real submission.
 - [x] Add visitor reviews with public readback and verify submission.
 - [x] Check navigation, form validation, and page metadata.
+- [x] Add personalised safari planner page.
+- [x] Add booking confirmations (admin confirms, visitor tracks status).
+- [x] Add password-protected admin area for bookings, reviews and overview.
+- [ ] Verify admin login, booking confirmation flow and planner in preview.

@@ -16,6 +16,8 @@ export type Database = {
     Tables: {
       booking_requests: {
         Row: {
+          admin_note: string
+          confirmed_at: string | null
           created_at: string
           email: string
           guests: number
@@ -28,6 +30,8 @@ export type Database = {
           travel_date: string
         }
         Insert: {
+          admin_note?: string
+          confirmed_at?: string | null
           created_at?: string
           email: string
           guests: number
@@ -40,6 +44,8 @@ export type Database = {
           travel_date: string
         }
         Update: {
+          admin_note?: string
+          confirmed_at?: string | null
           created_at?: string
           email?: string
           guests?: number
@@ -57,6 +63,7 @@ export type Database = {
         Row: {
           country: string
           created_at: string
+          hidden: boolean
           id: string
           name: string
           rating: number
@@ -66,6 +73,7 @@ export type Database = {
         Insert: {
           country?: string
           created_at?: string
+          hidden?: boolean
           id?: string
           name: string
           rating: number
@@ -75,6 +83,7 @@ export type Database = {
         Update: {
           country?: string
           created_at?: string
+          hidden?: boolean
           id?: string
           name?: string
           rating?: number

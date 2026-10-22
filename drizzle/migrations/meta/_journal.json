@@ -8,6 +8,13 @@
       "when": 1792561120462,
       "tag": "0000_booking_requests_and_visitor_reviews",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "7",
+      "when": 1792653060597,
+      "tag": "0001_booking_confirmations_and_review_moderation",
+      "breakpoints": true
     }
   ]
 }
