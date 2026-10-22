@@ -12,8 +12,10 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as AboutRouteImport } from './routes/about'
 import { Route as BookingRouteImport } from './routes/booking'
+import { Route as BookingStatusRouteImport } from './routes/booking-status'
 import { Route as ContactRouteImport } from './routes/contact'
 import { Route as ItineraryRouteImport } from './routes/itinerary'
+import { Route as PlanRouteImport } from './routes/plan'
 import { Route as TestimonialsRouteImport } from './routes/testimonials'
 import { Route as ToursRouteImport } from './routes/tours'
 import { Route as ToursSlugRouteImport } from './routes/tours_.$slug'
@@ -33,6 +35,11 @@ const BookingRoute = BookingRouteImport.update({
   path: '/booking',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BookingStatusRoute = BookingStatusRouteImport.update({
+  id: '/booking-status',
+  path: '/booking-status',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ContactRoute = ContactRouteImport.update({
   id: '/contact',
   path: '/contact',
@@ -41,6 +48,11 @@ const ContactRoute = ContactRouteImport.update({
 const ItineraryRoute = ItineraryRouteImport.update({
   id: '/itinerary',
   path: '/itinerary',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PlanRoute = PlanRouteImport.update({
+  id: '/plan',
+  path: '/plan',
   getParentRoute: () => rootRouteImport,
 } as any)
 const TestimonialsRoute = TestimonialsRouteImport.update({
@@ -63,8 +75,10 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/booking': typeof BookingRoute
+  '/booking-status': typeof BookingStatusRoute
   '/contact': typeof ContactRoute
   '/itinerary': typeof ItineraryRoute
+  '/plan': typeof PlanRoute
   '/testimonials': typeof TestimonialsRoute
   '/tours': typeof ToursRoute
   '/tours/$slug': typeof ToursSlugRoute
@@ -73,8 +87,10 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/booking': typeof BookingRoute
+  '/booking-status': typeof BookingStatusRoute
   '/contact': typeof ContactRoute
   '/itinerary': typeof ItineraryRoute
+  '/plan': typeof PlanRoute
   '/testimonials': typeof TestimonialsRoute
   '/tours': typeof ToursRoute
   '/tours/$slug': typeof ToursSlugRoute
@@ -84,8 +100,10 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/about': typeof AboutRoute
   '/booking': typeof BookingRoute
+  '/booking-status': typeof BookingStatusRoute
   '/contact': typeof ContactRoute
   '/itinerary': typeof ItineraryRoute
+  '/plan': typeof PlanRoute
   '/testimonials': typeof TestimonialsRoute
   '/tours': typeof ToursRoute
   '/tours_/$slug': typeof ToursSlugRoute
@@ -96,8 +114,10 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/booking'
+    | '/booking-status'
     | '/contact'
     | '/itinerary'
+    | '/plan'
     | '/testimonials'
     | '/tours'
     | '/tours/$slug'
@@ -106,8 +126,10 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/booking'
+    | '/booking-status'
     | '/contact'
     | '/itinerary'
+    | '/plan'
     | '/testimonials'
     | '/tours'
     | '/tours/$slug'
@@ -116,8 +138,10 @@ export interface FileRouteTypes {
     | '/'
     | '/about'
     | '/booking'
+    | '/booking-status'
     | '/contact'
     | '/itinerary'
+    | '/plan'
     | '/testimonials'
     | '/tours'
     | '/tours_/$slug'
@@ -127,8 +151,10 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AboutRoute: typeof AboutRoute
   BookingRoute: typeof BookingRoute
+  BookingStatusRoute: typeof BookingStatusRoute
   ContactRoute: typeof ContactRoute
   ItineraryRoute: typeof ItineraryRoute
+  PlanRoute: typeof PlanRoute
   TestimonialsRoute: typeof TestimonialsRoute
   ToursRoute: typeof ToursRoute
   ToursSlugRoute: typeof ToursSlugRoute
@@ -157,6 +183,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof BookingRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/booking-status': {
+      id: '/booking-status'
+      path: '/booking-status'
+      fullPath: '/booking-status'
+      preLoaderRoute: typeof BookingStatusRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/contact': {
       id: '/contact'
       path: '/contact'
@@ -169,6 +202,13 @@ declare module '@tanstack/react-router' {
       path: '/itinerary'
       fullPath: '/itinerary'
       preLoaderRoute: typeof ItineraryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/plan': {
+      id: '/plan'
+      path: '/plan'
+      fullPath: '/plan'
+      preLoaderRoute: typeof PlanRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/testimonials': {
@@ -199,8 +239,10 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AboutRoute: AboutRoute,
   BookingRoute: BookingRoute,
+  BookingStatusRoute: BookingStatusRoute,
   ContactRoute: ContactRoute,
   ItineraryRoute: ItineraryRoute,
+  PlanRoute: PlanRoute,
   TestimonialsRoute: TestimonialsRoute,
   ToursRoute: ToursRoute,
   ToursSlugRoute: ToursSlugRoute,
