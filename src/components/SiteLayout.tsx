@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 const nav = [
   { to: "/", label: "Home" },
   { to: "/tours", label: "Tours" },
+  { to: "/plan", label: "Plan my safari" },
   { to: "/itinerary", label: "Itinerary" },
   { to: "/about", label: "About" },
   { to: "/testimonials", label: "Testimonials" },
@@ -60,7 +61,7 @@ export function SiteLayout({ children }: { children: ReactNode }) {
             <a href={`mailto:${EMAIL}`} className="flex items-center gap-2 hover:text-gold"><Mail className="h-4 w-4" />{EMAIL}</a>
           </div>
         </div>
-        <p className="border-t border-overlay-foreground/10 py-5 text-center text-xs opacity-60">© {new Date().getFullYear()} Daystar Globe Tours and Safaris · Explore · Discover · Experience</p>
+        <p className="border-t border-overlay-foreground/10 py-5 text-center text-xs opacity-60">© {new Date().getFullYear()} Daystar Globe Tours and Safaris · Explore · Discover · Experience · <Link to="/admin" className="hover:text-gold">Admin</Link></p>
       </footer>
       <a href={whatsappLink()} target="_blank" rel="noreferrer" aria-label="Chat on WhatsApp" className="fixed bottom-5 right-5 z-50 flex h-14 w-14 items-center justify-center rounded-full bg-whatsapp text-overlay-foreground shadow-card transition-transform hover:scale-110">
         <MessageCircle className="h-7 w-7" />

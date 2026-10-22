@@ -1,6 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { useServerFn } from "@tanstack/react-start";
-import { useRouter } from "@tanstack/react-router";
+import { Link, useRouter } from "@tanstack/react-router";
 import { CheckCircle, Send, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { tours } from "@/lib/site";
@@ -43,7 +43,7 @@ export function VisitorForm({ kind, selectedTour = "Custom Kenya itinerary" }: {
     } catch { setError("We couldn't save your submission. Please try again."); }
     finally { setBusy(false); }
   }
-  if (success) return <div role="status" className="border-l-4 border-primary bg-secondary p-6"><CheckCircle className="mb-3 h-7 w-7 text-primary" /><p>{success}</p><Button variant="outline" className="mt-4" onClick={() => setSuccess("")}>{booking ? "Send another request" : "Write another review"}</Button></div>;
+  if (success) return <div role="status" className="border-l-4 border-primary bg-secondary p-6"><CheckCircle className="mb-3 h-7 w-7 text-primary" /><p>{success}</p><div className="mt-4 flex flex-wrap gap-3">{booking && <Button asChild><Link to="/booking-status">Track your booking</Link></Button>}<Button variant="outline" onClick={() => setSuccess("")}>{booking ? "Send another request" : "Write another review"}</Button></div></div>;
   return <form onSubmit={submit} className="space-y-5">
     <div className="grid gap-5 sm:grid-cols-2">
       <label className="text-sm font-medium">Your name<input name="name" autoComplete="name" required maxLength={100} className={inputClass} /></label>
