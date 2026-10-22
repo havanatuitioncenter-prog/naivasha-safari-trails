@@ -16,8 +16,8 @@ describe("durationDays", () => {
 describe("buildPlan", () => {
   it("always includes arrival and return days", () => {
     const plan = buildPlan({ days: 5, interests: ["wildlife"], pace: "balanced" });
-    expect(plan.days[0].title).toBe("Arrival & pick-up");
-    expect(plan.days[plan.days.length - 1].title).toBe("Return to Nairobi");
+    expect(plan.days.at(0)?.title).toBe("Arrival & pick-up");
+    expect(plan.days.at(-1)?.title).toBe("Return to Nairobi");
   });
 
   it("never schedules more tour days than the traveller has", () => {

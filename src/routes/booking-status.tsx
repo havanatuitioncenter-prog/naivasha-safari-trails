@@ -79,7 +79,7 @@ function BookingStatus() {
     setError("");
     setResult(null);
     try {
-      const res = await lookup({ data: { reference: String(values.reference ?? ""), email: String(values.email ?? "") } });
+      const res = await lookup({ data: { reference: String(values["reference"] ?? ""), email: String(values["email"] ?? "") } });
       setResult(res as Result);
     } catch (e) {
       setError(e instanceof Error ? e.message : "Something went wrong. Please try again.");
