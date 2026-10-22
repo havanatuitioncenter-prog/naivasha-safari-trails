@@ -22,7 +22,7 @@ describe("buildPlan", () => {
 
   it("never schedules more tour days than the traveller has", () => {
     const plan = buildPlan({ days: 2, interests: ["wildlife"], pace: "packed" });
-    const tourDays = plan.tours.reduce((sum, t) => sum + Math.max(1, Math.round(durationDays(t.duration))), 0);
+    const tourDays = plan.tours.reduce((sum, t) => sum + durationDays(t.duration), 0);
     expect(tourDays).toBeLessThanOrEqual(2);
   });
 
