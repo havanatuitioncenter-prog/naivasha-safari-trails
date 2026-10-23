@@ -5,4 +5,4 @@
 - [x] Add personalised safari planner page.
 - [x] Add booking confirmations (admin confirms, visitor tracks status).
 - [x] Add password-protected admin area for bookings, reviews and overview.
-- [ ] Verify admin login, booking confirmation flow and planner in preview.
+- [x] Verify admin login, booking confirmation flow and planner in preview.
