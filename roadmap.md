@@ -6,3 +6,7 @@
 - [x] Add booking confirmations (admin confirms, visitor tracks status).
 - [x] Add password-protected admin area for bookings, reviews and overview.
 - [x] Verify admin login, booking confirmation flow and planner in preview.
+- [ ] Add safari preference questions and WhatsApp enquiry links.
+- [ ] Export all bookings as CSV.
+- [ ] Manage tours and photos from admin with public readback.
+- [ ] Verify the requested flows and tests.
