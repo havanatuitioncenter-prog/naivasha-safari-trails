@@ -25,6 +25,7 @@ export type Database = {
           message: string
           name: string
           phone: string
+          safari_answers: Json
           status: string
           tour: string
           travel_date: string
@@ -39,6 +40,7 @@ export type Database = {
           message?: string
           name: string
           phone: string
+          safari_answers?: Json
           status?: string
           tour: string
           travel_date: string
@@ -53,9 +55,55 @@ export type Database = {
           message?: string
           name?: string
           phone?: string
+          safari_answers?: Json
           status?: string
           tour?: string
           travel_date?: string
+        }
+        Relationships: []
+      }
+      tours: {
+        Row: {
+          area: string
+          created_at: string
+          duration: string
+          highlights: string[]
+          id: string
+          images: string[]
+          includes: string[]
+          naivasha: boolean
+          name: string
+          slug: string
+          sort_order: number
+          summary: string
+        }
+        Insert: {
+          area: string
+          created_at?: string
+          duration: string
+          highlights?: string[]
+          id?: string
+          images?: string[]
+          includes?: string[]
+          naivasha?: boolean
+          name: string
+          slug: string
+          sort_order?: number
+          summary?: string
+        }
+        Update: {
+          area?: string
+          created_at?: string
+          duration?: string
+          highlights?: string[]
+          id?: string
+          images?: string[]
+          includes?: string[]
+          naivasha?: boolean
+          name?: string
+          slug?: string
+          sort_order?: number
+          summary?: string
         }
         Relationships: []
       }

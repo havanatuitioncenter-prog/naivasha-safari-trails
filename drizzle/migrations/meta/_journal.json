@@ -22,6 +22,13 @@
       "when": 1792737522304,
       "tag": "0002_allow_booking_status_transitions",
       "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "7",
+      "when": 1792831341304,
+      "tag": "0003_managed_tours_and_safari_questions",
+      "breakpoints": true
     }
   ]
 }
