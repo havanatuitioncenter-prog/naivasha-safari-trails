@@ -1,8 +1,11 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { toursQueryOptions } from '@/lib/tours.functions';
 import { createFileRoute } from "@tanstack/react-router";
 import { SiteLayout, TourCard, SectionTitle } from "@/components/SiteLayout";
-import { tours } from "@/lib/site";
+
 
 export const Route = createFileRoute("/tours")({
+  loader: ({context}) => context.queryClient.ensureQueryData(toursQueryOptions),
   head: () => ({
     meta: [
       { property: "og:type", content: "website" },
@@ -17,6 +20,7 @@ export const Route = createFileRoute("/tours")({
 });
 
 function Tours() {
+  const {data:tours}=useSuspenseQuery(toursQueryOptions);
   const naivasha = tours.filter((t) => t.naivasha);
   const kenya = tours.filter((t) => !t.naivasha);
   return (

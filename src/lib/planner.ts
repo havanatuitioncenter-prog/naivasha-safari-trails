@@ -49,9 +49,9 @@ function scoreTour(tour: Tour, selected: InterestId[]): number {
   return score * 10 + (tour.naivasha ? 2 : 1);
 }
 
-export function buildPlan(answers: PlanAnswers): SafariPlan {
+export function buildPlan(answers: PlanAnswers, catalogue: Tour[] = tours): SafariPlan {
   const capacity = Math.max(1, Math.min(answers.days, 14));
-  const ranked = [...tours].sort((a, b) => scoreTour(b, answers.interests) - scoreTour(a, answers.interests));
+  const ranked = [...catalogue].sort((a, b) => scoreTour(b, answers.interests) - scoreTour(a, answers.interests));
 
   const chosen: Tour[] = [];
   let used = 0;
