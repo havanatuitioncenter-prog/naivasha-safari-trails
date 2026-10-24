@@ -162,7 +162,7 @@ export const adminUploadPhoto=createServerFn({method:'POST'}).inputValidator((in
  const {error}=await supabaseAdmin.storage.from('tour-photos').upload(path,bytes,{contentType:data.type});
  if(error)throw new Error('Could not upload the photo.');
  const {data:signed}=await supabaseAdmin.storage.from('tour-photos').createSignedUrl(path,3600);
- return {path,url:signed?.signedUrl.replace(process.env['SUPABASE_URL']!,import.meta.env.VITE_SUPABASE_URL)??''};
+ return {path,url:signed?.signedUrl.replace(process.env['SUPABASE_URL']!,import.meta.env['VITE_SUPABASE_URL'])??''};
 });
 export const adminExportBookings=createServerFn({method:'GET'}).handler(async()=>{
  await requireAdmin(process.env['SESSION_SECRET']!);

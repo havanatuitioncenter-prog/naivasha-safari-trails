@@ -7,7 +7,8 @@ describe("Visitor submissions", () => {
  it("accepts a valid booking request", () => expect(bookingSchema.safeParse(booking).success).toBe(true));
  it("rejects past dates", () => expect(bookingSchema.safeParse({...booking, travel_date:"2020-01-01"}).success).toBe(false));
  it("rejects impossible dates", () => expect(bookingSchema.safeParse({...booking, travel_date:"2099-02-31"}).success).toBe(false));
- it("rejects unknown tours", () => expect(bookingSchema.safeParse({...booking, tour:"unknown"}).success).toBe(false));
+ it("accepts newly managed tour names for server catalogue verification", () => expect(bookingSchema.safeParse({...booking, tour:"New Nairobi Safari"}).success).toBe(true));
+ it("stores safari preferences with booking requests", () => expect(bookingSchema.parse({...booking,safari_answers:{group:'Family',accommodation:'Luxury',interests:['Wildlife','Hiking'],pickup:'Nairobi hotel',needs:'Vegetarian'}}).safari_answers).toEqual({group:'Family',accommodation:'Luxury',interests:['Wildlife','Hiking'],pickup:'Nairobi hotel',needs:'Vegetarian'}));
  it("requires consent for publicly shared reviews", () => expect(reviewSchema.safeParse({name:"Visitor",country:"Kenya",tour:booking.tour,rating:5,review:"A wonderful experience.",consent:false,website:""}).success).toBe(false));
  it("rejects ratings outside five stars", () => expect(reviewSchema.safeParse({name:"Visitor",country:"Kenya",tour:booking.tour,rating:6,review:"A wonderful experience.",consent:true,website:""}).success).toBe(false));
  it("has a unique detail slug for every tour", () => expect(new Set(tours.map(t => tourSlug(t.name))).size).toBe(9));

@@ -17,7 +17,7 @@ export const listTours = createServerFn({ method: 'GET' }).handler(async (): Pro
   const {supabaseAdmin}=await import('@/integrations/supabase/client.server');
   const {data:signed,error:signError}=await supabaseAdmin.storage.from('tour-photos').createSignedUrls(paths,3600);
   if(signError) throw new Error('Tour photos are temporarily unavailable.');
-  for(const item of signed??[]) if(item.path&&item.signedUrl) urls.set(item.path,item.signedUrl.replace(url,import.meta.env.VITE_SUPABASE_URL));
+  for(const item of signed??[]) if(item.path&&item.signedUrl) urls.set(item.path,item.signedUrl.replace(url,import.meta.env['VITE_SUPABASE_URL']));
  }
  return (data??[]).map(t=>{const photoUrls=t.images.map(p=>urls.get(p)).filter((p):p is string=>Boolean(p));return {...t, photoUrls,image:photoUrls[0]??originalTours.find(o=>tourSlug(o.name)===t.slug)?.image??originalTours[0]?.image??''};});
 });
