@@ -1,3 +1,5 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { toursQueryOptions } from '@/lib/tours.functions';
 import { createFileRoute } from "@tanstack/react-router";
 import { z } from "zod";
 import { SiteLayout, SectionTitle } from "@/components/SiteLayout";
@@ -6,6 +8,7 @@ import { tourChoice } from "@/lib/submission-schemas";
 
 export const Route = createFileRoute("/booking")({
   validateSearch: (search) => z.object({ tour: tourChoice.catch("Custom Kenya itinerary") }).parse(search),
+  loader: ({context}) => context.queryClient.ensureQueryData(toursQueryOptions),
   head: () => ({ meta: [
     { title: "Booking Request | Daystar Globe Tours & Safaris" },
     { name: "description", content: "Request your Kenya safari from Nairobi with Daystar Globe Tours. Share your dates, group size and preferred tour." },

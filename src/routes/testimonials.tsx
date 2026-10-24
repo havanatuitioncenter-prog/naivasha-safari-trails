@@ -2,10 +2,11 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Star } from "lucide-react";
 import { SiteLayout, SectionTitle } from "@/components/SiteLayout";
 import { VisitorForm } from "@/components/VisitorForms";
+import { toursQueryOptions } from "@/lib/tours.functions";
 import { listReviews } from "@/lib/submissions.functions";
 
 export const Route = createFileRoute("/testimonials")({
-  loader: () => listReviews(),
+  loader: async ({context}) => { const [reviews] = await Promise.all([listReviews(),context.queryClient.ensureQueryData(toursQueryOptions)]); return reviews; },
   head: () => ({ meta: [
     { title: "Visitor Reviews | Daystar Globe Tours & Safaris" },
     { name: "description", content: "Read visitor reviews of Daystar Globe Tours and share your Kenya safari experience." },

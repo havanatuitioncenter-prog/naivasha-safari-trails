@@ -1,11 +1,14 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { toursQueryOptions } from '@/lib/tours.functions';
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, ShieldCheck, Compass, Users, Car } from "lucide-react";
 import hero from "@/assets/amboseli.jpg";
 import naivasha from "@/assets/hero-naivasha.jpg";
 import { SiteLayout, TourCard, SectionTitle } from "@/components/SiteLayout";
-import { tours, faqs, whatsappLink } from "@/lib/site";
+import { faqs, whatsappLink } from "@/lib/site";
 
 export const Route = createFileRoute("/")({
+  loader: ({context}) => context.queryClient.ensureQueryData(toursQueryOptions),
   head: () => ({
     meta: [
       { property: "og:type", content: "website" },
@@ -29,6 +32,7 @@ const destinations = [
 ];
 
 function Index() {
+  const {data:tours}=useSuspenseQuery(toursQueryOptions);
   const naivashaTours = tours.filter((t) => t.naivasha);
   return (
     <SiteLayout>
@@ -48,7 +52,7 @@ function Index() {
 
       <section className="bg-primary text-primary-foreground">
         <div className="mx-auto grid max-w-7xl grid-cols-2 gap-6 px-4 py-10 text-center md:grid-cols-4">
-          {[["9+", "Signature tours"], ["6", "Kenyan destinations"], ["6", "Naivasha experiences"], ["24/7", "WhatsApp support"]].map(([n, l]) => (
+          {[[String(tours.length), "Signature tours"], ["6", "Kenyan destinations"], [String(naivashaTours.length), "Naivasha experiences"], ["Nairobi", "Our base"]].map(([n, l]) => (
             <div key={l}><p className="font-display text-5xl text-gold">{n}</p><p className="mt-1 text-sm uppercase tracking-widest opacity-80">{l}</p></div>
           ))}
         </div>

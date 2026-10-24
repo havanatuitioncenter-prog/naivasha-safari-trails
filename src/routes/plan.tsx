@@ -1,11 +1,15 @@
+import { useSuspenseQuery } from '@tanstack/react-query';
+import { toursQueryOptions } from '@/lib/tours.functions';
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useState } from "react";
 import { Compass, CalendarDays, ArrowRight } from "lucide-react";
 import { SiteLayout, SectionTitle } from "@/components/SiteLayout";
 import { Button } from "@/components/ui/button";
+import { whatsappLink } from "@/lib/site";
 import { buildPlan, interests, type InterestId, type SafariPlan } from "@/lib/planner";
 
 export const Route = createFileRoute("/plan")({
+  loader: ({context}) => context.queryClient.ensureQueryData(toursQueryOptions),
   head: () => ({
     meta: [
       { title: "Plan My Safari | Daystar Globe Tours & Safaris" },
@@ -26,6 +30,7 @@ const paces = [
 ] as const;
 
 function PlanPage() {
+  const {data:tours}=useSuspenseQuery(toursQueryOptions);
   const [days, setDays] = useState(5);
   const [selected, setSelected] = useState<InterestId[]>(["wildlife"]);
   const [pace, setPace] = useState<"relaxed" | "balanced" | "packed">("balanced");
@@ -104,7 +109,7 @@ function PlanPage() {
             </div>
           </div>
 
-          <Button size="lg" className="w-full" onClick={() => setPlan(buildPlan({ days, interests: selected, pace }))}>
+          <Button size="lg" className="w-full" onClick={() => setPlan(buildPlan({ days, interests: selected, pace }, tours))}>
             Build my safari plan <ArrowRight />
           </Button>
         </div>
@@ -145,6 +150,7 @@ function PlanPage() {
                 <Button asChild size="lg">
                   <Link to="/booking" search={{ tour: "Custom Kenya itinerary" }}>Request this safari</Link>
                 </Button>
+                <Button asChild variant="outline" size="lg"><a href={whatsappLink(`Hello Daystar Globe Tours, I would like a ${days}-day safari. Interests: ${selected.join(", ")}. Pace: ${pace}. Suggested tours: ${plan.tours.map(t=>t.name).join(", ")}.`)} target="_blank" rel="noreferrer">Enquire on WhatsApp</a></Button>
                 <Button asChild variant="outline" size="lg">
                   <Link to="/tours">Browse all tours</Link>
                 </Button>

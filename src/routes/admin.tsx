@@ -2,9 +2,10 @@ import { createFileRoute, useRouter } from "@tanstack/react-router";
 import { useState, type FormEvent } from "react";
 import { useServerFn } from "@tanstack/react-start";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { Eye, EyeOff, Lock, LogOut, Star, Trash2 } from "lucide-react";
+import { Eye, EyeOff, Lock, LogOut, Star, Trash2, Download, MessageCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import {
+  adminExportBookings,
   adminDeleteReview,
   adminListBookings,
   adminListReviews,
@@ -16,12 +17,20 @@ import {
   getAdminSession,
 } from "@/lib/admin.functions";
 
+import { AdminTours } from '@/components/AdminTours';
+import { whatsappLink } from '@/lib/site';
+
 export const Route = createFileRoute("/admin")({
   loader: () => getAdminSession(),
   head: () => ({
     meta: [
       { title: "Admin | Daystar Globe Tours & Safaris" },
       { name: "robots", content: "noindex, nofollow" },
+      { name: "description", content: "Manage Daystar Globe tours, bookings and visitor reviews." },
+      { property: "og:title", content: "Daystar Globe Admin" },
+      { property: "og:description", content: "Daystar Globe Tours management area." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary" },
     ],
   }),
   component: AdminPage,
@@ -31,7 +40,7 @@ const inputClass = "mt-2 w-full rounded-md border border-input bg-background px-
 
 type Booking = {
   id: string; created_at: string; name: string; email: string; phone: string; tour: string;
-  travel_date: string; guests: number; message: string; status: string; admin_note: string; confirmed_at: string | null;
+  travel_date: string; guests: number; message: string; status: string; admin_note: string; confirmed_at: string | null; safari_answers: Record<string, unknown>;
 };
 type Review = {
   id: string; created_at: string; name: string; country: string; tour: string; rating: number; review: string; hidden: boolean;
@@ -88,20 +97,25 @@ function BookingsTab() {
   const queryClient = useQueryClient();
   const fetchBookings = useServerFn(adminListBookings);
   const setStatus = useServerFn(adminSetBookingStatus);
+  const exportBookings = useServerFn(adminExportBookings);
+  const [exporting,setExporting]=useState(false);
+  const [error,setError]=useState("");
+  async function download(){setExporting(true);setError("");try{const {csv}=await exportBookings();const url=URL.createObjectURL(new Blob([csv],{type:"text/csv;charset=utf-8"}));const a=document.createElement("a");a.href=url;a.download="daystar-bookings.csv";a.click();URL.revokeObjectURL(url);}catch{setError("Could not export bookings. Please try again.");}finally{setExporting(false);}}
   const { data } = useQuery({ queryKey: ["admin-bookings"], queryFn: fetchBookings });
   const [notes, setNotes] = useState<Record<string, string>>({});
 
   async function update(id: string, status: "new" | "confirmed" | "declined") {
-    await setStatus({ data: { id, status, admin_note: notes[id] ?? "" } });
+    const {ok}=await setStatus({ data: { id, status, admin_note: notes[id] ?? data?.bookings.find(b=>b.id===id)?.admin_note ?? "" } });
+    if(!ok){setError("Could not update this booking.");return;}
     await queryClient.invalidateQueries({ queryKey: ["admin-bookings"] });
     await queryClient.invalidateQueries({ queryKey: ["admin-overview"] });
   }
 
   const bookings = (data?.bookings ?? []) as Booking[];
-  if (bookings.length === 0) return <p className="py-10 text-center text-muted-foreground">No booking requests yet.</p>;
+
 
   return (
-    <ul className="space-y-4">
+    <><div className="mb-6 flex flex-wrap items-center justify-between gap-3"><h2 className="font-display text-3xl text-primary">Booking requests</h2><Button variant="outline" disabled={exporting} onClick={download}><Download />{exporting?"Exporting…":"Export all bookings CSV"}</Button></div>{error&&<p role="alert" className="mb-4 text-destructive">{error}</p>}{!bookings.length&&<p>No booking requests yet.</p>}<ul className="space-y-4">
       {bookings.map((b) => (
         <li key={b.id} className="rounded-xl border bg-card p-5">
           <div className="flex flex-wrap items-start justify-between gap-3">
@@ -115,6 +129,7 @@ function BookingsTab() {
             <StatusBadge status={b.status} />
           </div>
           {b.message && <p className="mt-3 rounded-lg bg-secondary p-3 text-sm text-secondary-foreground">{b.message}</p>}
+          {b.safari_answers && <dl className="mt-4 grid gap-2 text-sm sm:grid-cols-2">{Object.entries(b.safari_answers).filter(([,v])=>Array.isArray(v)?v.length:Boolean(v)).map(([key,value])=><div key={key}><dt className="font-semibold capitalize text-primary">{key}</dt><dd className="break-words text-muted-foreground">{Array.isArray(value)?value.join(", "):String(value)}</dd></div>)}</dl>}
           <label className="mt-4 block text-xs font-semibold uppercase tracking-widest text-muted-foreground">
             Note to customer (shown on their status page)
             <textarea
@@ -126,13 +141,14 @@ function BookingsTab() {
             />
           </label>
           <div className="mt-4 flex flex-wrap gap-2">
+            <Button asChild size="sm" variant="outline"><a href={whatsappLink(`Hello Daystar Globe Tours, please follow up on booking ${b.id.slice(0,8).toUpperCase()} for ${b.tour}.`)} target="_blank" rel="noreferrer"><MessageCircle />WhatsApp enquiry</a></Button>
             <Button size="sm" onClick={() => update(b.id, "confirmed")} disabled={b.status === "confirmed"}>Confirm</Button>
             <Button size="sm" variant="outline" onClick={() => update(b.id, "declined")} disabled={b.status === "declined"}>Decline</Button>
             <Button size="sm" variant="ghost" onClick={() => update(b.id, "new")} disabled={b.status === "new"}>Mark as new</Button>
           </div>
         </li>
       ))}
-    </ul>
+    </ul></>
   );
 }
 
@@ -215,9 +231,10 @@ function OverviewTab() {
 function AdminDashboard() {
   const logout = useServerFn(adminLogout);
   const router = useRouter();
-  const [tab, setTab] = useState<"overview" | "bookings" | "reviews">("overview");
+  const [tab, setTab] = useState<"overview" | "tours" | "bookings" | "reviews">("overview");
   const tabs = [
     { id: "overview", label: "Overview" },
+    { id: "tours", label: "Tours" },
     { id: "bookings", label: "Bookings" },
     { id: "reviews", label: "Reviews" },
   ] as const;
@@ -241,9 +258,9 @@ function AdminDashboard() {
         </div>
       </header>
       <div className="mx-auto max-w-6xl px-4 py-8">
-        <div className="mb-8 flex gap-2 border-b">
+        <div className="mb-8 flex flex-wrap gap-2 border-b">
           {tabs.map((t) => (
-            <button
+            <Button variant="ghost"
               key={t.id}
               type="button"
               onClick={() => setTab(t.id)}
@@ -252,10 +269,11 @@ function AdminDashboard() {
               }`}
             >
               {t.label}
-            </button>
+            </Button>
           ))}
         </div>
         {tab === "overview" && <OverviewTab />}
+        {tab === "tours" && <AdminTours />}
         {tab === "bookings" && <BookingsTab />}
         {tab === "reviews" && <ReviewsTab />}
       </div>

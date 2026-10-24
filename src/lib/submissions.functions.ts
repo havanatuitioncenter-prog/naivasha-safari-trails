@@ -7,6 +7,10 @@ export const submitBooking = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => bookingSchema.parse(input))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    if(data.tour !== 'Custom Kenya itinerary') {
+      const {data:tour}=await supabaseAdmin.from('tours').select('id').eq('name',data.tour).maybeSingle();
+      if(!tour)return {success:false as const,message:'Choose an available tour or a custom Kenya itinerary.'};
+    }
     const { website: _website, ...row } = data;
     const { data: saved, error } = await supabaseAdmin.from("booking_requests").insert(row).select("id").single();
     if (error || !saved) return { success: false as const, message: "Your request could not be saved. Please try again or contact us on WhatsApp." };
@@ -17,6 +21,10 @@ export const submitReview = createServerFn({ method: "POST" })
   .inputValidator((input: unknown) => reviewSchema.parse(input))
   .handler(async ({ data }) => {
     const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    if(data.tour !== 'Custom Kenya itinerary') {
+      const {data:tour}=await supabaseAdmin.from('tours').select('id').eq('name',data.tour).maybeSingle();
+      if(!tour)return {success:false as const,message:'Choose an available tour or a custom Kenya itinerary.'};
+    }
     const { website: _website, consent: _consent, ...row } = data;
     const { data: saved, error } = await supabaseAdmin.from("visitor_reviews").insert(row).select("id").single();
     if (error || !saved) return { success: false as const, message: "Your review could not be saved. Please try again." };
