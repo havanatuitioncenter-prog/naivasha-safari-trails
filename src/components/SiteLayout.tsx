@@ -92,7 +92,7 @@ export function TourCard({ tour, detailed = false }: { tour: Tour; detailed?: bo
           <span className="flex items-center gap-1"><MapPin className="h-3.5 w-3.5 text-gold" />{tour.area}</span>
           <span className="flex items-center gap-1"><Clock className="h-3.5 w-3.5 text-gold" />{tour.duration}</span>
         </div>
-        <h3 className="mt-3 text-2xl font-semibold text-primary"><Link to="/tours/$slug" params={{ slug: tourSlug(tour.name) }}>{tour.name}</Link></h3>
+        <h3 className="mt-3 text-2xl font-semibold text-primary"><Link to="/tours/$slug" params={{ slug: 'slug' in tour ? String(tour.slug) : tourSlug(tour.name) }}>{tour.name}</Link></h3>
         <p className="mt-2 text-sm text-muted-foreground">{tour.summary}</p>
         <ul className="mt-4 flex flex-wrap gap-2">
           {tour.highlights.map((h) => <li key={h} className="rounded-full bg-secondary px-3 py-1 text-xs text-secondary-foreground">{h}</li>)}
@@ -105,7 +105,8 @@ export function TourCard({ tour, detailed = false }: { tour: Tour; detailed?: bo
             </ul>
           </div>
         )}
-        <Button asChild className="mt-6"><Link to="/tours/$slug" params={{ slug: tourSlug(tour.name) }}>View tour & request booking</Link></Button>
+        <Button asChild className="mt-6 whitespace-normal text-center"><Link to="/tours/$slug" params={{ slug: 'slug' in tour ? String(tour.slug) : tourSlug(tour.name) }}>View tour & request booking</Link></Button>
+        <Button asChild variant="outline" className="mt-3"><a href={whatsappLink(`Hello Daystar Globe Tours, I'd like to enquire about ${tour.name}.`)} target="_blank" rel="noreferrer"><MessageCircle />WhatsApp enquiry</a></Button>
       </div>
     </article>
   );
